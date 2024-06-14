@@ -1,0 +1,7 @@
+{
+  "name": "RcGuide",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
