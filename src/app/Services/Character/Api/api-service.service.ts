@@ -18,8 +18,6 @@ export class ApiServiceService {
     //TODO: ARREGLAR PETICION PARA IDS
     ids.unshift(0);
     let params = ids.join(',');
-
-    console.log('Params to seach...', params);
     return this.http.get<Character[]>(env.urlBase + '/character/' + params);
   }
 

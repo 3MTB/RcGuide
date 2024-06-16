@@ -17,10 +17,17 @@
   <ion-title class="ion-text-center"
     >{{"Shared.Details" | translate}} of {{character.name}}</ion-title
   >
+  @if(backToFavorites){
+  <ion-button fill="clear" slot="start" [routerLink]="['/favorites']">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+    {{"MENUMAIN.FAVORITES" | translate }}
+  </ion-button>
+  }@else{
   <ion-button fill="clear" slot="start" [routerLink]="['/characters']">
     <ion-icon name="chevron-back-outline"></ion-icon>
     {{"Shared.Back"|translate}}
   </ion-button>
+  }
 </ion-toolbar>
 
 <ion-content>

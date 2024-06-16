@@ -16,7 +16,9 @@
     "Back": "Volver",
     "All": "Todos",
     "LoadingMore": "Cargando Más",
-    "Details":"Detalles"
+    "Details":"Detalles",
+    "Alert":"Alerta"
+
   },
   "CharactersPage": {
     "SearchByName": "Buscar por nombre",
@@ -30,6 +32,8 @@
       "Type": "Tipo",
       "PlanetOrigin": "Planeta de Origen",
       "UltimateLocation": "Ultima Locación"
-    }
+    },
+    "FavoriteDelete":"¿Estás seguro que quieres eliminar este personaje de Favoritos?"
+
   }
 }

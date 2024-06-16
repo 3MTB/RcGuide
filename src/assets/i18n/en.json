@@ -15,7 +15,8 @@
     "Back": "Back",
     "All": "All",
     "LoadingMore": "Loading More",
-    "Details": "Details"
+    "Details": "Details",
+    "Alert":"Alert"
 
   },
   "CharactersPage": {
@@ -30,6 +31,7 @@
       "Type": "Type",
       "PlanetOrigin": "Planet Origin",
       "UltimateLocation": "Ultimate Location"
-    }
+    },
+    "FavoriteDelete":"Are you sure you want delete this character from Favorites?"
   }
 }

@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
   standalone: true,
-  imports: [IonCardHeader, IonCard, IonCardTitle, IonCardContent, IonLabel, IonIcon, IonButton,IonMenuButton,RouterLink, IonContent,TranslateModule, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardHeader, IonCard, IonCardTitle, IonCardContent, IonLabel, IonIcon, IonButton, IonMenuButton, RouterLink, IonContent, TranslateModule, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class DetailsPage implements OnInit {
 
@@ -37,6 +37,7 @@ export class DetailsPage implements OnInit {
       url: '',
       created: ''
     };
+  backToFavorites: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private servCharacter: ApiServiceService) { }
 
@@ -52,7 +53,8 @@ export class DetailsPage implements OnInit {
       x => {
         this.character = x;
       }
-    )
-
+    );
+    let resaltbackToFavorite = this.activatedRoute.snapshot.queryParamMap.get('backToFavorite');
+    this.backToFavorites = resaltbackToFavorite?.toLocaleLowerCase() === 'true' ? true : false;
   }
 }

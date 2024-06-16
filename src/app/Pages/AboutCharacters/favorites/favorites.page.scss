@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.item {
+  flex: 1 1 min-content;
+  min-width: min-content;
+}
+
+ion-card {
+  min-width: 165px;
+  border-bottom: 2px solid var(--ion-color-detailgreen);
+}
+
+ion-icon {
+  float: right;
+}
+
+.iconFavorite {
+  position: relative;
+  right: -16px;
+  transition: 0.5s;
+  float: right;
+  top: 20px;
+
+  &:hover {
+    transition: 0.5s;
+    transform: scale(1.1, 1.1);
+  }
+}

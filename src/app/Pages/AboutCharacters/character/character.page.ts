@@ -6,6 +6,7 @@ import { Character } from 'Interfaces/Character';
 import { CharacterStorageService } from 'Services/Character/character-storage.service';
 import { Route, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 
 @Component({
   selector: 'app-character',
@@ -21,7 +22,8 @@ export class CharacterPage /* implements OnInit  */ {
 
   constructor(
     private storageS: CharacterStorageService,
-    private route: Router) {
+    private route: Router,
+  ) {
     /*     setTimeout(() => {
           console.log('Character Name: ', this.character.name, ':::Is Favorite?: ', this.isFavorite);
         }, 3000); */

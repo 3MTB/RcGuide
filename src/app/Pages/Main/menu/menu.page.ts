@@ -6,6 +6,7 @@ import { Device } from '@capacitor/device';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { CharacterStorageService } from 'Services/Character/character-storage.service';
+import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 
 @Component({
   selector: 'app-menu',
@@ -30,10 +31,13 @@ export class MenuPage implements OnInit {
   selectedLanguage: string = 'en';
   totalFavorites = 0;
 
-  test !: Promise<any>;
 
-  constructor(private translateServ: TranslateService,
-     public servCharacterStorage: CharacterStorageService) { }
+  constructor(
+    private translateServ: TranslateService,
+    private servCharacterStorage: CharacterStorageService,
+    private servComunication: ServComunicationsService
+
+  ) { }
 
   async ngOnInit() {
 
@@ -44,12 +48,11 @@ export class MenuPage implements OnInit {
     this.changeTheme();
     this.changeLang();
 
-    this.servCharacterStorage.getAllFavorites().then(x => {
-      this.totalFavorites = x.length;
-    });
 
-    this.test = this.servCharacterStorage.getAllFavorites();
-
+    this.updateTotalFavorites();
+    this.servComunication.action$.subscribe(x => {
+      this.updateTotalFavorites();
+    })
   }
 
   async myEvents() {
@@ -66,6 +69,11 @@ export class MenuPage implements OnInit {
     if (this.languages.some(x => x.value === data.value)) {
       this.selectedLanguage = data.value;
     }
+  }
+  updateTotalFavorites() {
+    this.servCharacterStorage.getAllFavorites().then(x => {
+      this.totalFavorites = x.length;
+    });
   }
 
   btnThemePush() {

@@ -10,13 +10,14 @@ import { ApiServiceService } from 'Services/Character/Api/api-service.service';
 import { Character } from 'Interfaces/Character';
 import { Info } from 'Interfaces/shared';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.page.html',
   styleUrls: ['./characters.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonInfiniteScrollContent,IonMenuButton, IonInfiniteScroll, IonCardSubtitle, IonText, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, CharacterPage, IonList, IonButton, TranslateModule, CharacterPage, IonButtons, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon, IonInfiniteScrollContent, IonMenuButton, IonInfiniteScroll, IonCardSubtitle, IonText, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, CharacterPage, IonList, IonButton, TranslateModule, CharacterPage, IonButtons, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CharactersPage implements OnInit {
 
@@ -35,7 +36,8 @@ export class CharactersPage implements OnInit {
   constructor(
     private storageService: CharacterStorageService,
     private apiServ: ApiServiceService,
-    private ServGeneral: ServStorageService
+    private ServGeneral: ServStorageService,
+    private servComunication: ServComunicationsService
 
   ) {
     ServGeneral.getNetwork().then(x => {
@@ -47,7 +49,11 @@ export class CharactersPage implements OnInit {
   ngOnInit(): void {
     this._getAllFavorites();
     this._initialCharacters();
-
+    this.servComunication.action$.subscribe(
+      () => {
+        this._getAllFavorites();
+      }
+    )
   }
   getIfIsFavorite(id: number) {
     return this.AllFavorites?.includes(id);
@@ -57,7 +63,6 @@ export class CharactersPage implements OnInit {
     this.storageService.getAllFavorites().then(
       x => {
         this.AllFavorites = x;
-        console.log('Favorites IN CHARACTERS: ', x);
       }
     );
 
