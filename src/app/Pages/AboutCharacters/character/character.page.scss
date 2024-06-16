@@ -1,6 +1,9 @@
 ion-card {
   min-width: 165px;
+  border-bottom: 2px solid var(--ion-color-detailgreen);
+ 
 }
+
 ion-icon {
   float: right;
 }
