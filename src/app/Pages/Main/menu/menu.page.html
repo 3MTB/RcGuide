@@ -1,18 +1,8 @@
 <ion-menu contentId="main-content" type="push">
   <ion-header class="ion-no-border">
     <ion-toolbar>
-      <ion-title class="title" slot="start">RC. Guide</ion-title>
-      <ion-select
-        [(ngModel)]="selectedLanguage"
-        [ngModelOptions]="{standalone:true}"
-        (ionChange)="changeLang()"
-      >
-        @for (lang of languages; track $index) {
-        <ion-select-option [value]="lang.value"
-          >{{lang.name}}</ion-select-option
-        >
-        }
-      </ion-select>
+      <ion-title class="ion-text-center">RC. Guide</ion-title>
+      <hr class="lineDivisor" />
       <ion-button fill="clear" slot="end" (click)="btnThemePush()">
         @if (isDark) {
         <ion-icon color="warning" name="sunny-outline"></ion-icon>
@@ -22,15 +12,50 @@
       </ion-button>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">
+  <ion-header> </ion-header>
+  <ion-content class="ion-padding ion-no-border">
     <ion-list>
-      <ion-item button [routerLink]="['/home']"
-        >{{"MENUMAIN.HOME" |translate}}</ion-item
+      <ion-item button [routerLink]="['/home']">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        {{"MENUMAIN.HOME" |translate}}</ion-item
       >
       <ion-item button [routerLink]="['/characters']">
+        <ion-icon slot="start" name="telescope-outline"></ion-icon>
         {{"MENUMAIN.CHARACTERS" |translate}}</ion-item
       >
-      <ion-item button>{{"MENUMAIN.GAMES" |translate}}</ion-item>
+      <ion-item button>
+        <ion-icon slot="start" name="game-controller-outline"></ion-icon>
+        {{"MENUMAIN.GAMES" | translate}}</ion-item
+      >
+      <ion-item button [routerLink]="['/favorites']">
+        <ion-icon slot="start" name="bookmark-outline"></ion-icon>
+        {{"MENUMAIN.FAVORITES" | translate}}
+        <!-- <ion-badge slot="end" color="medium">{{totalFavorites}}</ion-badge> -->
+        <ion-badge slot="end" color="medium">{{test | async}}</ion-badge>
+        <ion-label>Direct</ion-label>
+
+      </ion-item>
     </ion-list>
   </ion-content>
+
+  <ion-footer class="ion-no-border ion-text-center">
+    <ion-toolbar class="ion-padding">
+      <ion-select
+        [(ngModel)]="selectedLanguage"
+        [ngModelOptions]="{standalone:true}"
+        (ionChange)="changeLang()"
+        interface="popover"
+      >
+        <div slot="start">
+          <ion-icon name="options-outline"></ion-icon>
+          <ion-icon color="primary" name="language-outline"></ion-icon>
+        </div>
+        @for (lang of languages; track $index) {
+        <ion-select-option [value]="lang.value"
+          >{{lang.name}}</ion-select-option
+        >
+        }
+      </ion-select>
+    </ion-toolbar>
+  </ion-footer>
 </ion-menu>

@@ -3,7 +3,9 @@
     "HOME": "Inicio",
     "CHARACTERS": "Personajes",
     "GAMES": "Juegos",
-    "LinkOficialSerie": "Serie Oficial"
+    "LinkOficialSerie": "Serie Oficial",
+    "FAVORITES":"Favoritos"
+
   },
   "Main": {
     "DescriptionCharacters": "Información sobre los personajes",

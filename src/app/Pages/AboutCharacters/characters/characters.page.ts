@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButtons, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonCardSubtitle, IonInfiniteScroll, IonInfiniteScrollContent, IonMenuButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButtons, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonCardSubtitle, IonInfiniteScroll, IonInfiniteScrollContent, IonMenuButton, IonIcon } from '@ionic/angular/standalone';
 import { ServStorageService } from 'Services/storage/serv-storage.service';
 import { CharacterStorageService } from 'Services/Character/character-storage.service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
   templateUrl: './characters.page.html',
   styleUrls: ['./characters.page.scss'],
   standalone: true,
-  imports: [IonInfiniteScrollContent,IonMenuButton, IonInfiniteScroll, IonCardSubtitle, IonText, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, CharacterPage, IonList, IonButton, TranslateModule, CharacterPage, IonButtons, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon, IonInfiniteScrollContent,IonMenuButton, IonInfiniteScroll, IonCardSubtitle, IonText, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, CharacterPage, IonList, IonButton, TranslateModule, CharacterPage, IonButtons, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CharactersPage implements OnInit {
 
@@ -42,9 +42,7 @@ export class CharactersPage implements OnInit {
       this.isOnline = x;
     })
   }
-  clear() {
-    this.storageService.clearStorage();
-  }
+
 
   ngOnInit(): void {
     this._getAllFavorites();

@@ -15,11 +15,7 @@ export const routes: Routes = [
   {
     path: 'menu',
     loadComponent: () => import('./Pages/Main/menu/menu.page').then(m => m.MenuPage)
-  }/* ,
-  {
-    path: 'character',
-    loadComponent: () => import('./Pages/AboutCharacters/character/character.page').then(m => m.CharacterPage)
-  }, */
+  }
   , {
     path: 'characters',
     children: [
@@ -32,6 +28,10 @@ export const routes: Routes = [
         loadComponent: () => import('./Pages/AboutCharacters/details/details.page').then(m => m.DetailsPage)
       }
     ]
+  },
+  {
+    path: 'favorites',
+    loadComponent: () => import('./Pages/AboutCharacters/favorites/favorites.page').then( m => m.FavoritesPage)
   },
 
 

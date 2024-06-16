@@ -3,7 +3,8 @@
     "HOME": "Home",
     "CHARACTERS": "Characters",
     "GAMES": "Games",
-    "LinkOficialSerie": "Oficial Serie"
+    "LinkOficialSerie": "Oficial Serie",
+    "FAVORITES":"Favorites"
   },
   "Main": {
     "DescriptionCharacters": "Information about characters",
@@ -15,6 +16,7 @@
     "All": "All",
     "LoadingMore": "Loading More",
     "Details": "Details"
+
   },
   "CharactersPage": {
     "SearchByName": "Search By Name",

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Character, ApiResultCharacter } from 'Interfaces/Character';
 import { FilterCharacter } from 'Interfaces/shared';
+import { Env } from 'ionicons/dist/types/stencil-public-runtime';
 import { environment as env } from 'src/environments/environment.prod';
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,15 @@ export class ApiServiceService {
   getCharacterById(getById: string) {
     return this.http.get<Character>(env.urlGetById + getById);
   }
-  
+  getGroupOfCharacters(ids: number[]) {
+    //TODO: ARREGLAR PETICION PARA IDS
+    ids.unshift(0);
+    let params = ids.join(',');
+
+    console.log('Params to seach...', params);
+    return this.http.get<Character[]>(env.urlBase + '/character/' + params);
+  }
+
   getPageCharacter(pageUrl: string = env.urlBase + '/character') {
     return this.http.get<ApiResultCharacter>(pageUrl);
   }

@@ -1,3 +1,8 @@
-.title {
-  border-bottom: .2px solid var(--ion-color-detailgreen);
+.lineDivisor {
+  background: var(--ion-color-detailgreen);
+  width: 100px;
+  height: 3px;
+}
+p {
+  --background: var(--ion-color-detailGreen);
 }

@@ -7,6 +7,11 @@
   min-width: min-content;
 }
 
-.MyTitle {
+/* .MyTitle {
   border-bottom: 2px solid var(--ion-color-detailgreen);
+} */
+.lineSepare{
+  background-color: var(--ion-color-detailgreen);
+  width: 150px;
+  height: 4px  ;
 }

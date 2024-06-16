@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonMenu, IonSelect, IonSelectOption, IonHeader, IonTitle, IonToolbar, IonIcon, IonList, IonItem, IonButton, IonListHeader, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonMenu, IonSelect, IonSelectOption, IonHeader, IonTitle, IonToolbar, IonIcon, IonList, IonItem, IonButton, IonListHeader, IonLabel, IonFooter, IonSegment, IonSegmentButton, IonBadge } from '@ionic/angular/standalone';
 import { Device } from '@capacitor/device';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
+import { CharacterStorageService } from 'Services/Character/character-storage.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonListHeader, IonButton, IonMenu, TranslateModule, IonSelect, IonSelectOption, RouterLink, IonItem, IonList, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonBadge, IonSegmentButton, IonSegment, IonFooter, IonLabel, IonListHeader, IonButton, IonMenu, TranslateModule, IonSelect, IonSelectOption, RouterLink, IonItem, IonList, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class MenuPage implements OnInit {
 
@@ -27,8 +28,12 @@ export class MenuPage implements OnInit {
     }
   ];
   selectedLanguage: string = 'en';
+  totalFavorites = 0;
 
-  constructor(private translateServ: TranslateService) { }
+  test !: Promise<any>;
+
+  constructor(private translateServ: TranslateService,
+     public servCharacterStorage: CharacterStorageService) { }
 
   async ngOnInit() {
 
@@ -38,6 +43,13 @@ export class MenuPage implements OnInit {
 
     this.changeTheme();
     this.changeLang();
+
+    this.servCharacterStorage.getAllFavorites().then(x => {
+      this.totalFavorites = x.length;
+    });
+
+    this.test = this.servCharacterStorage.getAllFavorites();
+
   }
 
   async myEvents() {

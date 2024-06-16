@@ -13,9 +13,7 @@ export class CharacterStorageService {
   constructor(private servStorage: Storage) {
     /*   this.updateAllFavorites(); */
   }
-  clearStorage() {
-    this.servStorage.clear();
-  }
+
   /*  private updateAllFavorites() {
      this.servStorage.get('favCharacters').then(data => {
        this._allFavorites = data;
@@ -47,8 +45,5 @@ export class CharacterStorageService {
   async getAllFavorites() {
     return await this.servStorage.get('favCharacters');
   }
-
-
-
-
+  
 }
