@@ -1,0 +1,33 @@
+{
+  "MENUMAIN": {
+    "HOME": "Inicio",
+    "CHARACTERS": "Personajes",
+    "GAMES": "Juegos",
+    "LinkOficialSerie": "Serie Oficial"
+  },
+  "Main": {
+    "DescriptionCharacters": "Información sobre los personajes",
+    "DescriptionGames": "Prueba tu conocimiento sobre Ricky And Morty"
+  },
+  "Shared": {
+    "WithoutConnection": "Sin Conexión",
+    "Back": "Volver",
+    "All": "Todos",
+    "LoadingMore": "Cargando Más",
+    "Details":"Detalles"
+  },
+  "CharactersPage": {
+    "SearchByName": "Buscar por nombre",
+    "ShowFilters": "Mostrar Filtros",
+    "HideFilters": "Ocultar Filtros",
+    "AboutCharacters": {
+      "Name": "Nombre",
+      "Status": "Estatus",
+      "Gender": "Genero",
+      "Specie": "Especie",
+      "Type": "Tipo",
+      "PlanetOrigin": "Planeta de Origen",
+      "UltimateLocation": "Ultima Locación"
+    }
+  }
+}

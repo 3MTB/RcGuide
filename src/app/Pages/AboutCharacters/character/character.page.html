@@ -1,0 +1,51 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Character</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Character</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+
+<div>
+  <img
+    [alt]="character.name"
+    [src]="character.image"
+    [routerLink]="[character.id]"
+  />
+
+  <!-- <ion-button class="iconFavorite" fill="clear" color="danger"> old button </ion-button> -->
+  @if(isFavorite){
+  <ion-icon
+    (click)="changeFavoriteStatus()"
+    size="large"
+    color="success"
+    name="heart"
+  ></ion-icon>
+  }@else{
+  <ion-icon
+    (click)="changeFavoriteStatus()"
+    size="large"
+    name="heart-outline"
+  ></ion-icon>
+  }
+
+  <ion-card [routerLink]="[character.id]">
+    <ion-card-header>
+      <ion-card-title> {{character.name}}</ion-card-title>
+      <ion-card-subtitle>
+        {{"CharactersPage.AboutCharacters.Status" | translate}}:
+        {{character.status}}</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content>
+      {{"CharactersPage.AboutCharacters.Gender" | translate}}:
+      {{character.gender}}
+    </ion-card-content>
+  </ion-card>
+</div>

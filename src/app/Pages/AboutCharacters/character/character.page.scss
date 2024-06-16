@@ -1,0 +1,19 @@
+ion-card {
+  min-width: 165px;
+}
+ion-icon {
+  float: right;
+}
+
+.iconFavorite {
+  position: relative;
+  right: -16px;
+  transition: 0.5s;
+  float: right;
+  top: 20px;
+
+  &:hover {
+    transition: 0.5s;
+    transform: scale(1.1, 1.1);
+  }
+}

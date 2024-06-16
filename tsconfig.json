@@ -4,6 +4,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "Services/*":["./src/app/Services/*"],
+      "Pages/*":["./src/app/Pages/*"],
+      "Interfaces/*":["./src/app/Common/interfaces/*"]
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

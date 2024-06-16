@@ -1,0 +1,36 @@
+<ion-menu contentId="main-content" type="push">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-title slot="start">RC. Guide</ion-title>
+      <ion-select
+        [(ngModel)]="selectedLanguage"
+        [ngModelOptions]="{standalone:true}"
+        (ionChange)="changeLang()"
+      >
+        @for (lang of languages; track $index) {
+        <ion-select-option [value]="lang.value"
+          >{{lang.name}}</ion-select-option
+        >
+        }
+      </ion-select>
+      <ion-button fill="clear" slot="end" (click)="btnThemePush()">
+        @if (isDark) {
+        <ion-icon color="warning" name="sunny-outline"></ion-icon>
+        } @else {
+        <ion-icon color="primary" name="moon-outline"></ion-icon>
+        }
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item button [routerLink]="['/home']"
+        >{{"MENUMAIN.HOME" |translate}}</ion-item
+      >
+      <ion-item button [routerLink]="['/characters']">
+        {{"MENUMAIN.CHARACTERS" |translate}}</ion-item
+      >
+      <ion-item button>{{"MENUMAIN.GAMES" |translate}}</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

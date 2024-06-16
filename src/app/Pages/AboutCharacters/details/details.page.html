@@ -1,0 +1,76 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+ -->
+<ion-toolbar>
+  <ion-menu-button slot="end"></ion-menu-button>
+  <ion-title class="ion-text-center"
+    >{{"Shared.Details" | translate}} of {{character.name}}</ion-title
+  >
+  <ion-button fill="clear" slot="start" [routerLink]="['/characters']">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+    {{"Shared.Back"|translate}}
+  </ion-button>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card class="ion-align-self-center">
+    <img
+      [alt]="character.name"
+      class="ImgCharacter ion-padding"
+      [src]="character.image"
+    />
+    <ion-card-header>
+      <ion-card-title>
+        {{"CharactersPage.AboutCharacters.Name" | translate}} :
+        {{character.name}}</ion-card-title
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        {{"CharactersPage.AboutCharacters.Status" | translate}} :
+        <ion-label>{{character.status}}</ion-label>
+      </ion-label>
+
+      <br />
+      <ion-label>
+        {{"CharactersPage.AboutCharacters.Specie" | translate}} :
+        {{character.status}}
+      </ion-label>
+
+      <br />
+      <ion-label>
+        {{"CharactersPage.AboutCharacters.Type" | translate}}: {{character.type
+        === '' ? 'Empty' : character.type}}
+      </ion-label>
+
+      <br />
+      <ion-label>
+        {{"CharactersPage.AboutCharacters.Gender" | translate}}:
+        <ion-label> {{character.gender}}</ion-label>
+      </ion-label>
+
+      <br />
+      <ion-label>
+        {{"CharactersPage.AboutCharacters.PlanetOrigin" | translate}}:
+        <ion-label color="success"> {{character.origin.name}}</ion-label>
+      </ion-label>
+
+      <br />
+      <ion-label>
+        {{"CharactersPage.AboutCharacters.UltimateLocation" | translate}}:
+        <ion-label color="success"> {{character.location.name}}</ion-label>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,13 +1,38 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
+
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
+  {
+    path: 'home',
+    loadComponent: () => import('./Pages/Main/home/home.page').then(m => m.HomePage),
+    title: 'HOME'
+  },
+  {
+    path: 'menu',
+    loadComponent: () => import('./Pages/Main/menu/menu.page').then(m => m.MenuPage)
+  }/* ,
+  {
+    path: 'character',
+    loadComponent: () => import('./Pages/AboutCharacters/character/character.page').then(m => m.CharacterPage)
+  }, */
+  , {
+    path: 'characters',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./Pages/AboutCharacters/characters/characters.page').then(m => m.CharactersPage)
+      },
+      {
+        path: ':id',
+        loadComponent: () => import('./Pages/AboutCharacters/details/details.page').then(m => m.DetailsPage)
+      }
+    ]
+  },
+
+
 ];
