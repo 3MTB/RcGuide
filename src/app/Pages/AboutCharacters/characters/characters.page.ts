@@ -11,13 +11,14 @@ import { Character } from 'Interfaces/Character';
 import { Info } from 'Interfaces/shared';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
+import { FilterPage } from 'Pages/AboutCharacters/filter/filter.page';
 
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.page.html',
   styleUrls: ['./characters.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonInfiniteScrollContent, IonMenuButton, IonInfiniteScroll, IonCardSubtitle, IonText, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, CharacterPage, IonList, IonButton, TranslateModule, CharacterPage, IonButtons, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon, FilterPage, IonInfiniteScrollContent, IonMenuButton, IonInfiniteScroll, IonCardSubtitle, IonText, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, CharacterPage, IonList, IonButton, TranslateModule, CharacterPage, IonButtons, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CharactersPage implements OnInit {
 
@@ -38,7 +39,6 @@ export class CharactersPage implements OnInit {
     private apiServ: ApiServiceService,
     private ServGeneral: ServStorageService,
     private servComunication: ServComunicationsService
-
   ) {
     ServGeneral.getNetwork().then(x => {
       this.isOnline = x;
@@ -91,6 +91,20 @@ export class CharactersPage implements OnInit {
       event.target.disabled = true;
       event.target.complete();
     }
+  }
+
+  //! SEARCHER OPTIONS
+
+
+  //TODO : Agregar verificacion de que no se encontro coincidencias.
+  Search(url: string) {
+    this.apiServ.getPageCharacter(url).subscribe(
+      x => {
+        console.log(x);
+        this.allCharacters = x.results;
+        this.info = x.info;
+      })
+    //! cosistas
   }
 
 

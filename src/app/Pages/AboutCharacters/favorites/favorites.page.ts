@@ -59,7 +59,6 @@ export class FavoritesPage implements OnInit {
         }
       });
     })
-
   }
   initial() {
     this.servCharacterApi.getGroupOfCharacters(this.AllFavoritesId).subscribe(x => {

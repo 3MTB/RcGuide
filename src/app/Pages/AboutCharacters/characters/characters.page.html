@@ -4,10 +4,15 @@
     <ion-title class="ion-text-center MyTitle"
       >{{"MENUMAIN.CHARACTERS"|translate}}</ion-title
     >
-    <hr class="lineSepare">
+    <hr class="lineSepare" />
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <!-- !        F  I L T E R   ....          -->
+  <!--*          Posicionar esto sticky in the peak  -->
+  <app-filter (urlSearch)="Search($event)"></app-filter>
+
+  <!-- !        Characteres Render....          -->
   <ion-list [inset]="true" class="container">
     @for (char of allCharacters; track char.id) {
     <ion-item class="item">

@@ -12,42 +12,71 @@
       </ion-button>
     </ion-toolbar>
   </ion-header>
-  <ion-header> </ion-header>
+
   <ion-content class="ion-padding ion-no-border">
     <ion-list>
+      <!--                ! home    -->
+
       <ion-item button [routerLink]="['/home']">
         <ion-icon slot="start" name="home-outline"></ion-icon>
         {{"MENUMAIN.HOME" |translate}}</ion-item
       >
+      <!--                ! characters    -->
+
       <ion-item button [routerLink]="['/characters']">
-        <ion-icon slot="start" name="telescope-outline"></ion-icon>
+        <ion-icon color="danger" slot="start" name="telescope"></ion-icon>
         {{"MENUMAIN.CHARACTERS" |translate}}</ion-item
       >
-      <ion-item button>
-        <ion-icon slot="start" name="game-controller-outline"></ion-icon>
+      <!--                ! GAMES     -->
+
+      <ion-item button class="goGame">
+        <ion-icon
+          slot="start"
+          color="warning"
+          name="game-controller"
+        ></ion-icon>
         {{"MENUMAIN.GAMES" | translate}}</ion-item
       >
-      <ion-item button [routerLink]="['/favorites']">
-        <ion-icon slot="start" name="bookmark-outline"></ion-icon>
-        {{"MENUMAIN.FAVORITES" | translate}}
-        <!-- <ion-badge slot="end" color="medium">{{totalFavorites}}</ion-badge> -->
-        <ion-badge slot="end" color="medium">{{totalFavorites }}</ion-badge>
-        <ion-label>Direct</ion-label>
+      <!--                !  FAVORITES   -->
 
+      <ion-item
+        button
+        [routerLink]="['/favorites']"
+        [disabled]="totalFavorites===0"
+      >
+        <ion-icon color="success" slot="start" name="bookmark"></ion-icon>
+        {{"MENUMAIN.FAVORITES" | translate}}
+        <ion-badge slot="end" [color]="totalFavorites >0 ? 'medium' : 'danger'"
+          >{{totalFavorites }}
+        </ion-badge>
+      </ion-item>
+
+      <!--                ! OFICIAL SERIE -->
+      <ion-item
+        button
+        (click)="openOficialSite()"
+        class="ion-margin-top ion-margin-horizontal"
+      >
+        <ion-icon
+          color="primary"
+          slot="start"
+          name="play-circle-outline"
+        ></ion-icon>
+        <ion-label>{{"MENUMAIN.LinkOficialSerie" | translate}}</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
 
   <ion-footer class="ion-no-border ion-text-center">
-    <ion-toolbar class="ion-padding">
+    <ion-toolbar>
       <ion-select
+        class="ion-padding"
         [(ngModel)]="selectedLanguage"
         [ngModelOptions]="{standalone:true}"
         (ionChange)="changeLang()"
         interface="popover"
       >
         <div slot="start">
-          <ion-icon name="options-outline"></ion-icon>
           <ion-icon color="primary" name="language-outline"></ion-icon>
         </div>
         @for (lang of languages; track $index) {

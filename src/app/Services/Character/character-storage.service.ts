@@ -16,17 +16,7 @@ export class CharacterStorageService {
     private servStorage: Storage,
     private servComunication: ServComunicationsService
 
-  ) {
-    /*   this.updateAllFavorites(); */
-  }
-
-  /*  private updateAllFavorites() {
-     this.servStorage.get('favCharacters').then(data => {
-       this._allFavorites = data;
-     });
-   }
-  */
-  //todo        INYECTAR E EMITIR QUE SE CAMBIO LOS FAVORITOS CON EL SERVICIO DE COMUNICACION
+  ) {}
   addFavoriteCharacter(addIdCharacter: number) {
     this.getAllFavorites().then(x => {
       this._allFavorites = x ?? [];
@@ -38,8 +28,6 @@ export class CharacterStorageService {
     });
     return this.servStorage.get('favCharacters');
   }
-
-  //todo        INYECTAR E EMITIR QUE SE CAMBIO LOS FAVORITOS CON EL SERVICIO DE COMUNICACION
 
   removeFavoriteCharacter(removeIdCharacter: number) {
     this.getAllFavorites().then(x => {

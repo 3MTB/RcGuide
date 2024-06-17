@@ -5,7 +5,6 @@
     "GAMES": "Juegos",
     "LinkOficialSerie": "Serie Oficial",
     "FAVORITES":"Favoritos"
-
   },
   "Main": {
     "DescriptionCharacters": "Información sobre los personajes",
@@ -18,7 +17,6 @@
     "LoadingMore": "Cargando Más",
     "Details":"Detalles",
     "Alert":"Alerta"
-
   },
   "CharactersPage": {
     "SearchByName": "Buscar por nombre",
@@ -34,6 +32,5 @@
       "UltimateLocation": "Ultima Locación"
     },
     "FavoriteDelete":"¿Estás seguro que quieres eliminar este personaje de Favoritos?"
-
   }
 }

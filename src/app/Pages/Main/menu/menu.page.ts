@@ -7,6 +7,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { CharacterStorageService } from 'Services/Character/character-storage.service';
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
+import { environment as env } from 'src/environments/environment.prod';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-menu',
@@ -80,12 +82,17 @@ export class MenuPage implements OnInit {
     this.isDark = !this.isDark;
     this.changeTheme();
   }
+
   changeTheme() {
     document.documentElement.classList.toggle('ion-palette-dark', this.isDark);
   }
+
   changeLang() {
     this.translateServ.use(this.selectedLanguage);
   }
 
+  openOficialSite() {
+    Browser.open({ url: env.urlSerieOficial });
+  }
 
 }

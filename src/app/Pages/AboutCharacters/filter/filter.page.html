@@ -1,0 +1,84 @@
+<ion-toolbar>
+  <!-- !          Name         -->
+  <ion-searchbar
+  class="searchByName"
+    [(ngModel)]="filterSearch.name"
+    [ngModelOptions]="{standalone:true}"
+    (ngModelChange)="Search()"
+    placeholder='{{"CharactersPage.SearchByName" | translate}}'
+    autocorrect="on"
+    show-cancel-button="focus"
+  ></ion-searchbar>
+
+  <ion-button
+    (click)="isOptionsOpen=!isOptionsOpen"
+    fill="clear"
+    [color]="isOptionsOpen ? 'warning':'success'"
+  >
+    @if(isOptionsOpen){ {{"CharactersPage.HideFilters" | translate}} } @else {
+    {{"CharactersPage.ShowFilters" | translate}} }
+  </ion-button>
+
+  @if(isOptionsOpen){
+  <form class="ion-margin">
+    <!--?                     STATUS                      -->
+    <ion-select
+      (ionChange)="Search()"
+      [(ngModel)]="filterSearch.status"
+      [ngModelOptions]="{standalone:true}"
+      placeholder='{{"CharactersPage.AboutCharacters.Status" | translate}}'
+      label='{{"CharactersPage.AboutCharacters.Status" | translate}}'
+    >
+      @for(status of objSearchOptions.status;track $index ){ @if($first){
+      <ion-select-option value="">{{"Shared.All"|translate}}</ion-select-option>
+      }
+      <ion-select-option [value]="status">{{status}}</ion-select-option>
+      }
+    </ion-select>
+    <!--?                     SPECIES                      -->
+    <ion-select
+      (ionChange)="Search()"
+      [(ngModel)]="filterSearch.species"
+      [ngModelOptions]="{standalone:true}"
+      placeholder='{{"CharactersPage.AboutCharacters.Specie" | translate}}'
+      label='{{"CharactersPage.AboutCharacters.Specie" | translate}}'
+    >
+      @for(specie of objSearchOptions.species;track $index ){ @if($first){
+      <ion-select-option value="">{{"Shared.All"|translate}}</ion-select-option>
+      }
+      <ion-select-option [value]="specie">{{specie}}</ion-select-option>
+      }
+    </ion-select>
+    <!--?                     GENDER                      -->
+    <ion-select
+      (ionChange)="Search()"
+      [(ngModel)]="filterSearch.gender"
+      [ngModelOptions]="{standalone:true}"
+      placeholder='{{"CharactersPage.AboutCharacters.Gender" | translate}}'
+      label='{{"CharactersPage.AboutCharacters.Gender" | translate}}'
+    >
+      @for(gender of objSearchOptions.gender;track $index ){ @if($first){
+      <ion-select-option value="">{{"Shared.All"|translate}}</ion-select-option>
+      }
+      <ion-select-option [value]="gender">{{gender}}</ion-select-option>
+      }
+    </ion-select>
+    <!--?                     TYPE                      -->
+    <ion-select
+      (ionChange)="Search()"
+      [(ngModel)]="filterSearch.type"
+      [ngModelOptions]="{standalone:true}"
+      placeholder='{{"CharactersPage.AboutCharacters.Type" | translate}}'
+      label='{{"CharactersPage.AboutCharacters.Type" | translate}}'
+    >
+      @for(type of objSearchOptions.type;track $index ){ @if($first){
+      <ion-select-option value="">{{"Shared.All"|translate}}</ion-select-option>
+      }
+      <ion-select-option [value]="type">{{type}}</ion-select-option>
+      }
+    </ion-select>
+
+    <!--?               F I N I S H       F I L T E R                      -->
+  </form>
+  }
+</ion-toolbar>
