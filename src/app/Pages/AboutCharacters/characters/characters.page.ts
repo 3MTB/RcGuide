@@ -9,9 +9,10 @@ import { CharacterPage } from 'Pages/AboutCharacters/character/character.page';
 import { ApiServiceService } from 'Services/Character/Api/api-service.service';
 import { Character } from 'Interfaces/Character';
 import { Info } from 'Interfaces/shared';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, AlertController } from '@ionic/angular';
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 import { FilterPage } from 'Pages/AboutCharacters/filter/filter.page';
+import { EMPTY, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-characters',
@@ -38,7 +39,8 @@ export class CharactersPage implements OnInit {
     private storageService: CharacterStorageService,
     private apiServ: ApiServiceService,
     private ServGeneral: ServStorageService,
-    private servComunication: ServComunicationsService
+    private servComunication: ServComunicationsService,
+    private alertController: AlertController
   ) {
     ServGeneral.getNetwork().then(x => {
       this.isOnline = x;
@@ -76,7 +78,7 @@ export class CharactersPage implements OnInit {
       });
     }
   }
-
+  //TODO:           ADD VERIFICATION TO KNOW IF HAS CONNECTIONS
   LoadMore(event: InfiniteScrollCustomEvent) {
     if (this.isOnline && this.info.next !== null) {
       this.apiServ.getPageCharacter(this.info.next ?? undefined).pipe(
@@ -98,13 +100,33 @@ export class CharactersPage implements OnInit {
 
   //TODO : Agregar verificacion de que no se encontro coincidencias.
   Search(url: string) {
-    this.apiServ.getPageCharacter(url).subscribe(
+    this.apiServ.getPageCharacter(url).pipe(
+      catchError((error) => {
+        console.log(error);
+        if (error.error.error && error.error.error === 'There is nothing here') {
+          this.showAlertNotFoundCharacters();
+          this._initialCharacters();
+          //! Show alert without searchers
+        }
+        return EMPTY;
+      })
+    ).subscribe(
       x => {
-        console.log(x);
         this.allCharacters = x.results;
         this.info = x.info;
       })
     //! cosistas
+  }
+
+  async showAlertNotFoundCharacters() {
+    //!                             ADD TRANSLATE
+    const alert = await this.alertController.create({
+      header: "Sin Registros encontrados",
+      message: 'No se han encontrados registros para la busqueda realizada...',
+      buttons: ['OK'],
+    });
+    alert.present();
+
   }
 
 
