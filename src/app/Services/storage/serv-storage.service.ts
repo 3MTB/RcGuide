@@ -19,13 +19,4 @@ export class ServStorageService {
     return await this.storage.get(key);
   }
 
-  //!                  N E T W O R K
-  setNetwork(state: boolean = true) {
-    this.storage.set('network', state);
-  }
-  getNetwork() {
-    return this.storage.get('network');
-  }
-  //!                  N E T W O R K
-
 }

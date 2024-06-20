@@ -6,12 +6,15 @@
   flex: 1 1 min-content;
   min-width: min-content;
 }
+.filters {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
 
-/* .MyTitle {
-  border-bottom: 2px solid var(--ion-color-detailgreen);
-} */
-.lineSepare{
+.lineSepare {
   background-color: var(--ion-color-detailgreen);
   width: 150px;
-  height: 4px  ;
+  height: 4px;
 }

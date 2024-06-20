@@ -12,6 +12,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CharacterPage } from "../character/character.page";
 import { RouterLink } from '@angular/router';
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
+import { ConnectionServService } from './../../../Common/connection-serv.service';
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.page.html',
@@ -34,31 +35,36 @@ export class FavoritesPage implements OnInit {
   constructor(
     private servCharacterStorage: CharacterStorageService,
     private servCharacterApi: ApiServiceService,
-    private ServGeneral: ServStorageService,
     private alertController: AlertController,
     private translate: TranslateService,
-    private servComunication: ServComunicationsService
+    private servComunication: ServComunicationsService,
+    private conexServ: ConnectionServService
   ) {
-    ServGeneral.getNetwork().then(x => {
-      this.isOnline = x;
-    })
+
   }
 
   ngOnInit() {
-    this.servCharacterStorage.getAllFavorites().then(x => {
-      this.AllFavoritesId = x ?? [];
-      if (this.AllFavoritesId.length > 0) {
-        this.initial();
-      }
-    });
-    this.servComunication.action$.subscribe(() => {
+    this.conexServ.$action.subscribe(x => {
+      this.isOnline = x;
+    })
+
+
+    if (this.isOnline) {
       this.servCharacterStorage.getAllFavorites().then(x => {
         this.AllFavoritesId = x ?? [];
         if (this.AllFavoritesId.length > 0) {
           this.initial();
         }
       });
-    })
+      this.servComunication.action$.subscribe(() => {
+        this.servCharacterStorage.getAllFavorites().then(x => {
+          this.AllFavoritesId = x ?? [];
+          if (this.AllFavoritesId.length > 0) {
+            this.initial();
+          }
+        });
+      })
+    }
   }
   initial() {
     this.servCharacterApi.getGroupOfCharacters(this.AllFavoritesId).subscribe(x => {
@@ -66,12 +72,9 @@ export class FavoritesPage implements OnInit {
     });
   }
   changeFavoriteStatus(character: Character) {
-
     this.translate.get('CharactersPage.FavoriteDelete').subscribe(message => {
       this.showAlert(character, message)
     });
-
-
   }
   showAlert(character: Character, message: string) {
     this.alertController.create({

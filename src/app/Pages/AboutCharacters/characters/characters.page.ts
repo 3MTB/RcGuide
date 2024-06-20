@@ -13,6 +13,7 @@ import { InfiniteScrollCustomEvent, AlertController } from '@ionic/angular';
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 import { FilterPage } from 'Pages/AboutCharacters/filter/filter.page';
 import { EMPTY, catchError } from 'rxjs';
+import { ConnectionServService } from './../../../Common/connection-serv.service';
 
 @Component({
   selector: 'app-characters',
@@ -38,13 +39,12 @@ export class CharactersPage implements OnInit {
   constructor(
     private storageService: CharacterStorageService,
     private apiServ: ApiServiceService,
-    private ServGeneral: ServStorageService,
     private servComunication: ServComunicationsService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private servNetwork: ConnectionServService
   ) {
-    ServGeneral.getNetwork().then(x => {
-      this.isOnline = x;
-    })
+
+
   }
 
 
@@ -55,20 +55,23 @@ export class CharactersPage implements OnInit {
       () => {
         this._getAllFavorites();
       }
-    )
+    );
+    this.servNetwork.$action.subscribe(x => {
+      this.isOnline = x
+    })
   }
   getIfIsFavorite(id: number) {
     return this.AllFavorites?.includes(id);
   }
 
   _getAllFavorites() {
-    this.storageService.getAllFavorites().then(
-      x => {
-        this.AllFavorites = x;
-      }
-    );
-
-
+    if (this.isOnline) {
+      this.storageService.getAllFavorites().then(
+        x => {
+          this.AllFavorites = x;
+        }
+      );
+    }
   }
   _initialCharacters() {
     if (this.isOnline) {
@@ -97,25 +100,25 @@ export class CharactersPage implements OnInit {
 
   //! SEARCHER OPTIONS
 
-
-  //TODO : Agregar verificacion de que no se encontro coincidencias.
   Search(url: string) {
-    this.apiServ.getPageCharacter(url).pipe(
-      catchError((error) => {
-        console.log(error);
-        if (error.error.error && error.error.error === 'There is nothing here') {
-          this.showAlertNotFoundCharacters();
-          this._initialCharacters();
-          //! Show alert without searchers
-        }
-        return EMPTY;
-      })
-    ).subscribe(
-      x => {
-        this.allCharacters = x.results;
-        this.info = x.info;
-      })
-    //! cosistas
+    if (this.isOnline) {
+      this.apiServ.getPageCharacter(url).pipe(
+        catchError((error) => {
+          console.log(error);
+          if (error.error.error && error.error.error === 'There is nothing here') {
+            //! Show alert without searchers and then showaLL THe Characters
+            this.showAlertNotFoundCharacters();
+            this._initialCharacters();
+            //! Show alert without searchers
+          }
+          return EMPTY;
+        })
+      ).subscribe(
+        x => {
+          this.allCharacters = x.results;
+          this.info = x.info;
+        })
+    }
   }
 
   async showAlertNotFoundCharacters() {
@@ -126,43 +129,6 @@ export class CharactersPage implements OnInit {
       buttons: ['OK'],
     });
     alert.present();
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*  ngOnInit() {
-     this.AllFavorites = this.storageService.getAllFavorites;
-   }
-   addValues() {
-     this.storageService.addFavoriteCharacter(1);
-     this.storageService.addFavoriteCharacter(3);
-     this.storageService.addFavoriteCharacter(5);
-   }
-   updateValue() {
-     this.AllFavorites = this.storageService.getAllFavorites;
-   }
-   removeValue() {
-     this.storageService.removeFavoriteCharacter(1);
-   } */
-
 
 }

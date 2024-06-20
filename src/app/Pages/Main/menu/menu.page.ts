@@ -74,7 +74,7 @@ export class MenuPage implements OnInit {
   }
   updateTotalFavorites() {
     this.servCharacterStorage.getAllFavorites().then(x => {
-      this.totalFavorites = x.length;
+      this.totalFavorites = x?.length ?? 0;
     });
   }
 

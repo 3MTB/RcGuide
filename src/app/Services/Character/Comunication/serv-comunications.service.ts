@@ -16,7 +16,6 @@ export class ServComunicationsService {
   action$ = this.actionSource.asObservable();
 
   updateFavorites() {
-
     this.actionSource.next(true);
   }
 }

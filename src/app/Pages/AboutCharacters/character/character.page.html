@@ -1,12 +1,9 @@
-
 <div>
-  <img
+  <ion-img
     [alt]="character.name"
     [src]="character.image"
-    [routerLink]="[character.id]"
+    (click)="goDetail()"
   />
-
-  <!-- <ion-button class="iconFavorite" fill="clear" color="danger"> old button </ion-button> -->
   @if(isFavorite){
   <ion-icon
     (click)="changeFavoriteStatus()"
@@ -22,7 +19,7 @@
   ></ion-icon>
   }
 
-  <ion-card [routerLink]="[character.id]">
+  <ion-card [disabled]="!isOnline" button [routerLink]="[character.id]">
     <ion-card-header>
       <ion-card-title> {{character.name}}</ion-card-title>
       <ion-card-subtitle>

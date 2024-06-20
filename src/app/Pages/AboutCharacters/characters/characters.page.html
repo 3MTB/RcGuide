@@ -10,8 +10,9 @@
 <ion-content>
   <!-- !        F  I L T E R   ....          -->
   <!--*          Posicionar esto sticky in the peak  -->
-  <app-filter (urlSearch)="Search($event)"></app-filter>
-
+  <div class="filters">
+    <app-filter (urlSearch)="Search($event)"></app-filter>
+  </div>
   <!-- !        Characteres Render....          -->
   <ion-list [inset]="true" class="container">
     @for (char of allCharacters; track char.id) {
@@ -36,7 +37,8 @@
       <ion-infinite-scroll-content
         loadingText='{{"Shared.LoadingMore" | translate}}'
         loadingSpinner="dots"
-      ></ion-infinite-scroll-content>
+      >
+      </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </ion-list>
 </ion-content>

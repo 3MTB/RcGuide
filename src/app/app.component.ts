@@ -4,6 +4,7 @@ import { MenuPage } from "Pages/Main/menu/menu.page"
 import { ServStorageService } from 'Services/storage/serv-storage.service';
 import { Network } from '@capacitor/network';
 import { AlertController } from '@ionic/angular';
+import { ConnectionServService } from './Common/connection-serv.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
   isOnline = true;
   constructor(
     private storage: ServStorageService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private servNetwork: ConnectionServService
   ) { }
 
   ngOnInit(): void {
@@ -27,12 +29,14 @@ export class AppComponent implements OnInit {
   MyEvents() {
     Network.getStatus().then(x => {
       this.isOnline = x.connected;
-      this.storage.setNetwork(this.isOnline);
+      this.servNetwork.setNetworkStatus(this.isOnline);
+      //this.storage.setNetwork(this.isOnline);
     });
 
     Network.addListener('networkStatusChange', status => {
       this.isOnline = status.connected;
-      this.storage.setNetwork(this.isOnline);
+      this.servNetwork.setNetworkStatus(this.isOnline);
+      /*   this.storage.setNetwork(this.isOnline); */
       if (!this.isOnline) {
         this.generateAlertConnection();
       }
@@ -46,7 +50,6 @@ export class AppComponent implements OnInit {
       message: "You don't have connection. Some Functions can't functional in the correct way.",
       buttons: ['OK'],
     });
-
     await alert.present();
   }
 

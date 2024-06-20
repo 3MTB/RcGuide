@@ -1,4 +1,4 @@
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonMen
 import { ApiServiceService } from 'Services/Character/Api/api-service.service';
 import { Character } from 'Interfaces/Character';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConnectionServService } from './../../../Common/connection-serv.service';
 
 @Component({
   selector: 'app-details',
@@ -38,23 +39,45 @@ export class DetailsPage implements OnInit {
       created: ''
     };
   backToFavorites: boolean = false;
+  isOnline = true;
 
-  constructor(private activatedRoute: ActivatedRoute, private servCharacter: ApiServiceService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
+    private servCharacter: ApiServiceService,
+    private servNetwork: ConnectionServService) { }
 
   ngOnInit() {
+    this.servNetwork.$action.subscribe(x => {
+      this.isOnline = x
+      this.checkConnection();
+    });
     let valueReceived = this.activatedRoute.snapshot.params['id'];
     if (isNaN(valueReceived) || !parseInt(valueReceived)) {
       {
         //!       Mostrar Alert
+        alert('error en los datos obtenidos...')
         return;
       }
     }
-    this.servCharacter.getCharacterById(valueReceived).subscribe(
-      x => {
-        this.character = x;
-      }
-    );
+    if (this.isOnline) {
+      this.servCharacter.getCharacterById(valueReceived).subscribe(
+        x => {
+          this.character = x;
+        }
+      );
+    }
+    else {
+      this.checkConnection();
+    }
     let resaltbackToFavorite = this.activatedRoute.snapshot.queryParamMap.get('backToFavorite');
     this.backToFavorites = resaltbackToFavorite?.toLocaleLowerCase() === 'true' ? true : false;
+  }
+  checkConnection() {
+    if (!this.isOnline) {
+      alert("You don't have connection");
+      this.route.navigateByUrl('characters');
+      //! this can be generate a issue !!!!
+    }
   }
 }
