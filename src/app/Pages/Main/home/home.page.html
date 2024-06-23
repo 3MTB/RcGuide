@@ -1,11 +1,14 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
     <ion-menu-button slot="start"> </ion-menu-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-button (click)="showBanner()">load banne/r</ion-button>
+    @if(message){ {{message}} }
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-card button [routerLink]="['/characters']">
     <ion-card-header>
       <ion-img src="./../../../assets/Imgs/characterPosterImg.png"> </ion-img>
@@ -28,10 +31,4 @@
       >
     </ion-card-header>
   </ion-card>
-
-
-<!--   <app-characters></app-characters>
- -->
-
-
 </ion-content>
