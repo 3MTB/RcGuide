@@ -1,10 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-menu-button slot="start"></ion-menu-button>
-    <ion-title class="ion-text-center MyTitle"
-      >{{"MENUMAIN.CHARACTERS"|translate}}</ion-title
+    <ion-button
+      href="./characters/#Inicio"
+      fill="clear"
+      class="ion-text-center"
+      color="dark"
     >
-    <hr class="lineSepare" />
+      <ion-title class="ion-text-center MyTitle"
+        >{{"MENUMAIN.CHARACTERS"|translate}}</ion-title
+      >
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -13,8 +19,10 @@
   <div class="filters">
     <app-filter (urlSearch)="Search($event)"></app-filter>
   </div>
+
   <!-- !        Characteres Render....          -->
-  <ion-list [inset]="true" class="container">
+
+  <ion-list id="Inicio" [inset]="true" class="container">
     @for (char of allCharacters; track char.id) {
     <ion-item class="item">
       <app-character

@@ -29,14 +29,15 @@
       >
       <!--                ! GAMES     -->
 
-      <ion-item button class="goGame">
+      <ion-item button disabled class="goGame">
         <ion-icon
           slot="start"
           color="warning"
           name="game-controller"
         ></ion-icon>
-        {{"MENUMAIN.GAMES" | translate}}</ion-item
-      >
+        {{"MENUMAIN.GAMES" | translate}}
+        <ion-badge slot="end" color="danger">Coming Soon</ion-badge>
+      </ion-item>
       <!--                !  FAVORITES   -->
 
       <ion-item

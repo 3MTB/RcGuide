@@ -42,12 +42,7 @@ export class CharactersPage implements OnInit {
     private servComunication: ServComunicationsService,
     private alertController: AlertController,
     private servNetwork: ConnectionServService
-  ) {
-
-
-  }
-
-
+  ) {}
   ngOnInit(): void {
     this._getAllFavorites();
     this._initialCharacters();
@@ -60,6 +55,9 @@ export class CharactersPage implements OnInit {
       this.isOnline = x
     })
   }
+
+  
+
   getIfIsFavorite(id: number) {
     return this.AllFavorites?.includes(id);
   }
