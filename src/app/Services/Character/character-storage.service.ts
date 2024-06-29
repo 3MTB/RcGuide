@@ -15,8 +15,10 @@ export class CharacterStorageService {
   constructor(
     private servStorage: Storage,
     private servComunication: ServComunicationsService
-
-  ) {}
+  ) {
+    //! BECAIFUL
+    servStorage.create();
+  }
   addFavoriteCharacter(addIdCharacter: number) {
     this.getAllFavorites().then(x => {
       this._allFavorites = x ?? [];
@@ -41,9 +43,6 @@ export class CharacterStorageService {
     return this.servStorage.get('favCharacters');
   }
 
-  /* getAllFavorites() {
-    return this.servStorage.get('favCharacters');
-  } */
   async getAllFavorites() {
     return await this.servStorage.get('favCharacters');
   }

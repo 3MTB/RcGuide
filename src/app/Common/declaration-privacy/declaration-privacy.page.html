@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-title> RC. Guide</ion-title>
+    <ion-label> Terms & Conditions </ion-label>
+    <ion-button
+      [routerLink]="['/home']"
+      slot="end"
+      fill="clear"
+      [color]="agree ? 'primary' : 'medium'"
+      [disabled]="!agree"
+    >
+      Continue</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list class="ion-padding-horizontal">
+    <ion-text class="ion-margin">
+      - Data Ownership: The data displayed in this application belongs to the
+      "Rick and Morty" series and is provided through the official Rick and
+      Morty API. We do not claim any ownership of this data.
+    </ion-text>
+    <ion-text class="ion-margin">
+      - Application Purpose: Rc.Guide is designed as an entertainment platform
+      for fans of "Rick and Morty". Its primary purpose is to allow users to
+      explore information and details about the characters, episodes, and
+      locations of the series.
+    </ion-text>
+    <ion-text class="ion-margin">
+      - Responsibility for Audiovisual Resources: We do not take responsibility
+      for the accuracy, completeness, or legality of the audiovisual resources
+      shown in the application. All multimedia content related to "Rick and
+      Morty" is the property of its respective owners and is used under fair use
+      terms.
+    </ion-text>
+    <ion-text class="ion-margin">
+      - Conformity with the Series: The data and information provided in this
+      application may not always be completely up-to-date or accurate in
+      relation to the "Rick and Morty" series. It is recommended to verify
+      official sources for precise details.
+    </ion-text>
+    <ion-text class="ion-margin">
+      - Personal Information: No personal information will be collected, stored,
+      or requested from users for the use of this application. No registration
+      or identification is required to access the features offered by Rc.Guide.
+    </ion-text>
+    <ion-text class="ion-margin">
+      - This privacy policy is intended to inform users about how we handle data
+      and information within Rc.Guide. If you have any questions or concerns
+      about privacy or the use of the application, please contact us.
+    </ion-text>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-text-center">
+  <ion-text [color]="agree ? 'medium' : 'danger'"
+    >You might to be agress with this Terms And conditions to Use RC.
+    Guide</ion-text
+  >
+
+  <ion-toolbar class="ion-margin">
+    <ion-checkbox
+      color="success"
+      [(ngModel)]="agree"
+      (ngModelChange)="{standalone : true}"
+      (ngModelChange)="changeAgree()"
+    >
+      I agree this terms and conditions
+    </ion-checkbox>
+  </ion-toolbar>
+</ion-footer>

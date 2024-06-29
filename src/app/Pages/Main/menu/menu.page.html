@@ -1,4 +1,4 @@
-<ion-menu contentId="main-content" type="push">
+<ion-menu contentId="main-content" type="push" [disabled]="disable">
   <ion-header class="ion-no-border">
     <ion-toolbar>
       <ion-title class="ion-text-center">RC. Guide</ion-title>
@@ -86,6 +86,12 @@
         >
         }
       </ion-select>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-button [routerLink]="['/terms']" fill="clear" color="medium">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Terms And Condictions
+      </ion-button>
     </ion-toolbar>
   </ion-footer>
 </ion-menu>

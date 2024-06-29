@@ -1,31 +1,30 @@
 <ion-header>
   <ion-toolbar>
     <ion-menu-button slot="start"> </ion-menu-button>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-button (click)="showBanner()">load banne/r</ion-button>
-    @if(message){ {{message}} }
+    <ion-title slot="start">{{"MENUMAIN.HOME" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card button [routerLink]="['/characters']">
+  <ion-card class="ion-text-center" button [routerLink]="['/characters']">
     <ion-card-header>
-      <ion-img src="./../../../assets/Imgs/characterPosterImg.png"> </ion-img>
-      <ion-title color="success"
-        >{{"MENUMAIN.CHARACTERS" | translate }}</ion-title
+      <img src="./../../../assets/Imgs/characterPosterImg.png" />
+      <ion-card-title color="success"
+        >{{"MENUMAIN.CHARACTERS" | translate }}</ion-card-title
       >
       <ion-card-subtitle>
         {{"Main.DescriptionCharacters" | translate}}
       </ion-card-subtitle>
     </ion-card-header>
   </ion-card>
-  <ion-card button>
+  <ion-card button disabled class="ion-text-center">
     <ion-card-header>
-      <ion-img src="./../../../assets/Imgs/gameKnowledgeImg.png"> </ion-img>
-      <ion-title color="warning"
-        >{{"MENUMAIN.GAMES" | translate }}::: COMING SOON</ion-title
-      >
+      <img src="./../../../assets/Imgs/gameKnowledgeImg.png" />
+      <ion-card-title color="warning"
+        >{{"MENUMAIN.GAMES" | translate }}
+      </ion-card-title>
+      <ion-note color="medium">Coming SOON</ion-note>
+
       <ion-card-subtitle
         >{{"Main.DescriptionGames" | translate}}</ion-card-subtitle
       >

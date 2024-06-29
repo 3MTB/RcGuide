@@ -9,6 +9,7 @@ import { CharacterStorageService } from 'Services/Character/character-storage.se
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 import { environment as env } from 'src/environments/environment.prod';
 import { Browser } from '@capacitor/browser';
+import { PrivacyServService } from 'src/app/Common/declaration-privacy/privacy-serv.service';
 
 @Component({
   selector: 'app-menu',
@@ -32,16 +33,23 @@ export class MenuPage implements OnInit {
   ];
   selectedLanguage: string = 'en';
   totalFavorites = 0;
+  disable = false;
 
 
   constructor(
     private translateServ: TranslateService,
     private servCharacterStorage: CharacterStorageService,
-    private servComunication: ServComunicationsService
-
+    private servComunication: ServComunicationsService,
+    private servPri: PrivacyServService
   ) { }
 
   async ngOnInit() {
+    this.servPri.$action.subscribe(
+      x => {
+        this.disable = !x;
+      }
+    )
+    this.disable = localStorage.getItem('terms') === 'false';
 
     //! INICIADOR DE EVENTOS
     await this.myEvents();
