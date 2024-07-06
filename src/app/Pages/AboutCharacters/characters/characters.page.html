@@ -15,9 +15,11 @@
 </ion-header>
 <ion-content>
   <!-- !        F  I L T E R   ....          -->
-  <!--*          Posicionar esto sticky in the peak  -->
   <div class="filters">
-    <app-filter (urlSearch)="Search($event)"></app-filter>
+    <app-filter
+      (urlSearch)="Search($event)"
+      [evUpdateFilters]="evResetValues"
+    ></app-filter>
   </div>
 
   <!-- !        Characteres Render....          -->

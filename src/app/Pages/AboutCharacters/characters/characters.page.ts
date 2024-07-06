@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButtons, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonCardSubtitle, IonInfiniteScroll, IonInfiniteScrollContent, IonMenuButton, IonIcon } from '@ionic/angular/standalone';
@@ -12,7 +12,7 @@ import { Info } from 'Interfaces/shared';
 import { InfiniteScrollCustomEvent, AlertController } from '@ionic/angular';
 import { ServComunicationsService } from 'Services/Character/Comunication/serv-comunications.service';
 import { FilterPage } from 'Pages/AboutCharacters/filter/filter.page';
-import { EMPTY, catchError } from 'rxjs';
+import { EMPTY, Observable, catchError } from 'rxjs';
 import { ConnectionServService } from './../../../Common/connection-serv.service';
 
 @Component({
@@ -24,8 +24,6 @@ import { ConnectionServService } from './../../../Common/connection-serv.service
 })
 export class CharactersPage implements OnInit {
 
-  /*  test !: Promise<any>;
-   AllFavorites: number[] = []; */
   AllFavorites: number[] = [];
   isOnline = true;
   allCharacters: Character[] = [];
@@ -35,6 +33,7 @@ export class CharactersPage implements OnInit {
     next: null,
     prev: null
   };
+  evResetValues: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private storageService: CharacterStorageService,
@@ -42,7 +41,7 @@ export class CharactersPage implements OnInit {
     private servComunication: ServComunicationsService,
     private alertController: AlertController,
     private servNetwork: ConnectionServService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this._getAllFavorites();
     this._initialCharacters();
@@ -56,7 +55,7 @@ export class CharactersPage implements OnInit {
     })
   }
 
-  
+
 
   getIfIsFavorite(id: number) {
     return this.AllFavorites?.includes(id);
@@ -72,12 +71,17 @@ export class CharactersPage implements OnInit {
     }
   }
   _initialCharacters() {
+    //! MANDAR INFORMACION PARA REINICIAR LOS VALORES DEL FILTRE DE BUSQUEDA
     if (this.isOnline) {
       this.apiServ.getPageCharacter().subscribe(x => {
         this.allCharacters = x.results;
         this.info = x.info;
+        this.UpdateValuesFilter(false);
       });
     }
+  }
+  UpdateValuesFilter(needed: boolean) {
+    this.evResetValues.emit(needed);
   }
   //TODO:           ADD VERIFICATION TO KNOW IF HAS CONNECTIONS
   LoadMore(event: InfiniteScrollCustomEvent) {
@@ -104,7 +108,9 @@ export class CharactersPage implements OnInit {
         catchError((error) => {
           console.log(error);
           if (error.error.error && error.error.error === 'There is nothing here') {
-            //! Show alert without searchers and then showaLL THe Characters
+            //! Show alert without searchers and then show aLL THe Characters
+            this.UpdateValuesFilter(true);
+
             this.showAlertNotFoundCharacters();
             this._initialCharacters();
             //! Show alert without searchers
@@ -115,6 +121,8 @@ export class CharactersPage implements OnInit {
         x => {
           this.allCharacters = x.results;
           this.info = x.info;
+          this.UpdateValuesFilter(false);
+
         })
     }
   }
@@ -122,8 +130,8 @@ export class CharactersPage implements OnInit {
   async showAlertNotFoundCharacters() {
     //!                             ADD TRANSLATE
     const alert = await this.alertController.create({
-      header: "Sin Registros encontrados",
-      message: 'No se han encontrados registros para la busqueda realizada...',
+      header: "Without Chracters Founds",
+      message: 'We havent found any character with the result to that seach...',
       buttons: ['OK'],
     });
     alert.present();
